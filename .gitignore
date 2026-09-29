@@ -1,0 +1,8 @@
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+results/
+data/*.mat
+data/*.tif
+*.executed.ipynb
+.DS_Store
