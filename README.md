@@ -1,35 +1,35 @@
-# Indian Pines: de HSI a MSI y características espaciales
+# Indian Pines: HSI to MSI and Spatial Features
 
 **Camilo Acevedo-Correa**
 
-Tutorial en Python para reducir un cubo hiperespectral mediante promedios por intervalos de longitud de onda y extraer características de entropía local y morfología matemática.
+Python tutorial for reducing a hyperspectral image (HSI) cube by averaging channels within wavelength intervals, then extracting local entropy and mathematical morphology features.
 
-[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/camiloace/indian-pines-hsi-to-msi/blob/main/preprocessing_indian_pines.ipynb)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/camiloace/indian-pines-hsi-to-msi/blob/main/preprocessing_indian_pines.ipynb)
 
-## Qué produce
+## Output dimensions
 
-| Entrada | Bandas agregadas | MSI + entropía + morfología |
+| Input | Aggregated bands | MSI + entropy + morphology |
 |---|---:|---:|
-| Indian Pines corregido, 145×145×200, con mapeo estándar | 8 | 24 |
-| Cubo completo de 220 canales, con su calibración alineada | 9 | 27 |
+| Corrected Indian Pines, 145×145×200, with the standard channel mapping | 8 | 24 |
+| Full 220-channel cube, with aligned wavelength calibration | 9 | 27 |
 
-**Por qué cambia el resultado original:** el notebook inicial conservaba 201 longitudes de onda para 200 bandas. Además, B9 (1360–1390 nm) depende de los canales originales 104, 105 y 106, eliminados en la convención estándar de 200 bandas. La versión revisada omite explícitamente ese intervalo o genera un error si se exige cubrirlo. No rellena una banda inexistente. El flujo de 220 canales permite nueve intervalos, pero la región de absorción puede tener baja calidad.
+**Why the output differs from the original notebook:** the original retained 201 wavelengths for 200 bands. Also, B9 (1360–1390 nm) relies on original channels 104, 105, and 106, which are removed in the standard 200-band version. The revised workflow explicitly skips this interval or raises an error when all intervals are required. It does not fill in a missing band. A 220-channel cube can cover all nine intervals, although the absorption region may have poor data quality.
 
-El mapeo de 200 canales se considera un **supuesto que debe comprobarse contra la procedencia del archivo**: se excluyen 104–108, 150–163 y 220, numerados desde 1. Si su copia fue modificada, proporcione su lista de canales originales. El tamaño del cubo no basta para verificar el mapeo.
+The 200-channel mapping is an **assumption that must be checked against the file's provenance**: original channels 104–108, 150–163, and 220 are excluded, using 1-based numbering. If your copy was modified, provide its original channel identifiers. The cube dimensions alone do not verify the mapping.
 
-## Uso en Google Colab
+## Run in Google Colab
 
-1. Abrir el enlace de Colab.
-2. Ejecutar la celda de preparación: clona este repositorio e instala las dependencias.
-3. [Descargar Indian_pines_corrected.mat](https://huggingface.co/datasets/danaroth/indian_pines/resolve/main/Indian_pines_corrected.mat?download=true) y cargarlo cuando el notebook lo solicite.
-4. Revisar el mapeo y ejecutar las celdas restantes en orden.
-5. Descargar los resultados desde `indian-pines-hsi-to-msi/results/` en el panel de archivos.
+1. Open the Colab link above.
+2. Run the setup cell to clone this repository and install the dependencies.
+3. [Download Indian_pines_corrected.mat](https://huggingface.co/datasets/danaroth/indian_pines/resolve/main/Indian_pines_corrected.mat?download=true) and upload it when the notebook prompts you.
+4. Review the channel mapping and run the remaining cells in order.
+5. Download the outputs from `indian-pines-hsi-to-msi/results/` in the Files panel.
 
-No es necesario montar Google Drive. Para otra variante del dataset, modificar `MAT_PATH`, `MAT_KEY` y `channel_ids`.
+You do not need to mount Google Drive. To use a different dataset variant, update `MAT_PATH`, `MAT_KEY`, and `channel_ids`. The notebook explanations are currently in Spanish.
 
-## Uso local
+## Run locally
 
-Se recomienda Python 3.12. Desde una terminal:
+Python 3.12 is recommended. Run the following commands in a terminal:
 
 ```bash
 git clone https://github.com/camiloace/indian-pines-hsi-to-msi.git
@@ -37,7 +37,7 @@ cd indian-pines-hsi-to-msi
 python -m venv .venv
 ```
 
-Activar el entorno en Windows PowerShell con `.venv\Scripts\Activate.ps1`, o en Linux/macOS con `source .venv/bin/activate`. Después:
+Activate the environment with `.venv\Scripts\Activate.ps1` in Windows PowerShell, or `source .venv/bin/activate` on Linux/macOS. Then run:
 
 ```bash
 python -m pip install -r requirements.txt
@@ -45,54 +45,52 @@ python -m pip install jupyterlab
 python -m jupyterlab
 ```
 
-Colocar el MAT en `data/` y abrir `preprocessing_indian_pines.ipynb` desde la raíz del repositorio. Las versiones exactas usadas en la verificación se registran en `requirements-tested.txt`.
+Place the MAT file in `data/` and open `preprocessing_indian_pines.ipynb` from the repository root. The exact package versions used for validation are recorded in `requirements-tested.txt`.
 
-## Archivos
+## Repository files
 
-- `preprocessing_indian_pines.ipynb`: tutorial revisado.
-- `hsi_processing.py`: funciones de selección y procesamiento.
-- `notebook-original-sin-salidas.ipynb`: código original como referencia histórica; conserva sus errores y requiere dependencias adicionales como `spectral`. Usar el tutorial revisado para ejecutar el flujo.
-- `data/wavelenght.csv`: tabla original de 220 canales; se conserva el nombre de archivo del autor.
-- `tests/test_processing.py`: pruebas de alineación, intervalos vacíos y entradas constantes.
-- `REVISION.md`: registro de cambios y límites de la verificación.
+- `preprocessing_indian_pines.ipynb`: revised tutorial.
+- `hsi_processing.py`: band aggregation and spatial processing functions.
+- `notebook-original-sin-salidas.ipynb`: original code preserved for historical reference, with saved outputs removed. It retains the original errors and requires additional dependencies such as `spectral`. Use the revised tutorial to run the workflow.
+- `data/wavelenght.csv`: original wavelength table for 220 channels; the author's filename is preserved.
+- `tests/test_processing.py`: checks for channel alignment, empty intervals, and constant inputs.
+- `REVISION.md`: changes, validation results, and verification limits, in Spanish.
 
-## Método
+## Method
 
-Se promedian uniformemente los canales incluidos en cada intervalo del notebook original (nm): 433–453, 450–515, 525–600, 630–680, 845–885, 1560–1660, 2100–2300, 500–680 y 1360–1390. Algunos intervalos se superponen.
+The workflow uniformly averages channels within each interval from the original notebook (nm): 433–453, 450–515, 525–600, 630–680, 845–885, 1560–1660, 2100–2300, 500–680, and 1360–1390. Some intervals overlap.
 
-La entropía se calcula sobre intensidades normalizadas globalmente y cuantizadas a 8 bits, con disco de radio 4. Cada mapa se escala por su máximo. La morfología procesa cada banda con dos erosiones, apertura, dos dilataciones y cierre/apertura por área; usa una huella de 5×5 y umbral de 1000 píxeles.
+Local entropy is computed from globally normalized intensities quantized to 8 bits, using a disk with a radius of 4 pixels. Each entropy map is divided by its maximum. Morphology processes each band with two erosions, an opening, two dilations, and area closing/opening, using a 5×5 footprint and an area threshold of 1,000 pixels.
 
-El promedio por intervalo **aproxima** una MSI: no simula la respuesta espectral completa ni las resoluciones espaciales de Landsat 8. La salida final contiene características, no nuevas bandas espectrales físicas. No se demuestra una mejora de clasificación; para evaluarla se requiere un experimento separado. Evitar que los vecindarios espaciales de entrenamiento y prueba se solapen y ajustar cualquier escalado usando solo entrenamiento.
+Averaging within wavelength intervals **approximates** a multispectral image (MSI). It does not simulate the full spectral response or spatial resolutions of Landsat 8. The final output combines intensity and spatial features; the added channels are not physical spectral bands. Improved classification accuracy has not been demonstrated and requires a separate experiment. Keep training and test spatial neighborhoods from overlapping, and fit any scaling using training data only.
 
-## Resultados
+## Saved results
 
-El notebook escribe `results/IP_MSI_8.mat` y `results/IP_FEATURES_24.mat` para la configuración estándar de 200 canales, o los equivalentes de 9 y 27 canales para 220. También guarda `processing_metadata.json` y `preview.png`. El JSON documenta índices, longitudes de onda y parámetros. Repetir una ejecución reemplaza los resultados de esa configuración.
+For the standard 200-channel input, the notebook writes `results/IP_MSI_8.mat` and `results/IP_FEATURES_24.mat`. For a 220-channel input, it writes the corresponding files with 9 and 27 channels. It also saves `processing_metadata.json` and `preview.png`. The JSON file records channel indices, wavelengths, and processing parameters. Running the same configuration again replaces its previous outputs.
 
-## Datos, atribución y licencia
+## Data, attribution, and license
 
-Descarga [Indian_pines_corrected.mat desde la copia pública de Hugging Face](https://huggingface.co/datasets/danaroth/indian_pines/resolve/main/Indian_pines_corrected.mat?download=true) y colócalo en `data/`, o cárgalo cuando Colab lo solicite. Esta copia es mantenida por terceros. Su descarga se verificó y coincide byte por byte con el MAT utilizado para validar este notebook: 5.953.527 bytes, matriz 145×145×200.
+Download [Indian_pines_corrected.mat from the public Hugging Face mirror](https://huggingface.co/datasets/danaroth/indian_pines/resolve/main/Indian_pines_corrected.mat?download=true) and place it in `data/`, or upload it when prompted in Colab. This mirror is maintained by a third party. The downloaded file was verified to match the MAT file used to validate this notebook byte for byte: 5,953,527 bytes, with dimensions 145×145×200.
 
 SHA-256: `ec2f8808710919d566f70f0d4aa885aae1ddfd42b734aba71c5e12ca65450939`.
 
-La [colección de escenas de EHU](https://www.ehu.eus/ccwintco/index.php/Hyperspectral_Remote_Sensing_Scenes#Indian_Pines) se conserva como referencia de la fuente original, pero devuelve HTTP 403 en las comprobaciones realizadas. El cubo MAT no se redistribuye en este repositorio.
+The [EHU scene collection](https://www.ehu.eus/ccwintco/index.php/Hyperspectral_Remote_Sensing_Scenes#Indian_Pines) is retained as a reference to the original source, but it returned HTTP 403 during our checks. The MAT cube is not redistributed in this repository.
 
-La publicación original de [Baumgardner, Biehl y Landgrebe (2015), Purdue PURR](https://doi.org/10.4231/R7RX991C) incluye la calibración de 220 canales y está marcada CC0. El CSV fue comparado, fila por fila, con el documento de calibración asociado a la copia local. Esto verifica los valores de calibración, pero no demuestra el historial de procesamiento del MAT.
+The original publication by [Baumgardner, Biehl, and Landgrebe (2015), Purdue PURR](https://doi.org/10.4231/R7RX991C) includes the 220-channel calibration and is marked CC0. The CSV was compared row by row with the calibration document associated with the local dataset copy. This verifies the calibration values, but does not establish the MAT file's processing history.
 
-La licencia del código está pendiente de elección por el autor; todavía no se ha añadido una licencia MIT. Las referencias conservan sus propias condiciones de uso.
+The author has not yet selected a code license; an MIT license has not been added. Referenced materials retain their own terms of use.
 
-## Referencias
+## References
 
 1. [Landsat 8 — NASA](https://science.nasa.gov/mission/landsat-8/).
 2. [Hyperspectral Remote Sensing Scenes — EHU](https://www.ehu.eus/ccwintco/index.php/Hyperspectral_Remote_Sensing_Scenes#Indian_Pines).
 3. [Image Processing with Python: Working with Entropy](https://towardsdatascience.com/image-processing-with-python-working-with-entropy-b05e9c84fc36).
 4. [Morphological Operations — j-manansala](https://github.com/j-manansala/morphological/blob/main/Morphological%20Operations.ipynb).
-5. [Dataset y calibración original — Purdue PURR](https://doi.org/10.4231/R7RX991C).
+5. [Original dataset and calibration — Purdue PURR](https://doi.org/10.4231/R7RX991C).
 
-## Pruebas
+## Tests
 
 ```bash
 python -m unittest discover -s tests -v
 ```
-
-
 
