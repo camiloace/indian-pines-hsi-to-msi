@@ -4,7 +4,7 @@
 
 Tutorial en Python para reducir un cubo hiperespectral mediante promedios por intervalos de longitud de onda y extraer características de entropía local y morfología matemática.
 
-[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/camiloace/indian-pines-hsi-to-msi/blob/main/indian_pines_hsi_to_msi.ipynb)
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/camiloace/indian-pines-hsi-to-msi/blob/main/preprocessing_indian_pines.ipynb)
 
 ## Qué produce
 
@@ -45,11 +45,11 @@ python -m pip install jupyterlab
 python -m jupyterlab
 ```
 
-Colocar el MAT en `data/` y abrir `indian_pines_hsi_to_msi.ipynb` desde la raíz del repositorio. Las versiones exactas usadas en la verificación se registran en `requirements-tested.txt`.
+Colocar el MAT en `data/` y abrir `preprocessing_indian_pines.ipynb` desde la raíz del repositorio. Las versiones exactas usadas en la verificación se registran en `requirements-tested.txt`.
 
 ## Archivos
 
-- `indian_pines_hsi_to_msi.ipynb`: tutorial revisado.
+- `preprocessing_indian_pines.ipynb`: tutorial revisado.
 - `hsi_processing.py`: funciones de selección y procesamiento.
 - `notebook-original-sin-salidas.ipynb`: código original como referencia histórica; conserva sus errores y requiere dependencias adicionales como `spectral`. Usar el tutorial revisado para ejecutar el flujo.
 - `data/wavelenght.csv`: tabla original de 220 canales; se conserva el nombre de archivo del autor.
@@ -89,3 +89,5 @@ La licencia del código está pendiente de elección por el autor; todavía no s
 ```bash
 python -m unittest discover -s tests -v
 ```
+
+
