@@ -21,7 +21,7 @@ El mapeo de 200 canales se considera un **supuesto que debe comprobarse contra l
 
 1. Abrir el enlace de Colab.
 2. Ejecutar la celda de preparación: clona este repositorio e instala las dependencias.
-3. Cargar `Indian_pines_corrected.mat` cuando el notebook lo solicite.
+3. [Descargar Indian_pines_corrected.mat](https://huggingface.co/datasets/danaroth/indian_pines/resolve/main/Indian_pines_corrected.mat?download=true) y cargarlo cuando el notebook lo solicite.
 4. Revisar el mapeo y ejecutar las celdas restantes en orden.
 5. Descargar los resultados desde `indian-pines-hsi-to-msi/results/` en el panel de archivos.
 
@@ -70,7 +70,11 @@ El notebook escribe `results/IP_MSI_8.mat` y `results/IP_FEATURES_24.mat` para l
 
 ## Datos, atribución y licencia
 
-El cubo MAT no se redistribuye aquí. Obtenerlo de la [colección de escenas de EHU](https://www.ehu.eus/ccwintco/index.php/Hyperspectral_Remote_Sensing_Scenes#Indian_Pines). Durante la preparación, esa página devolvió HTTP 403; se utilizó la copia local del autor para las pruebas.
+Descarga [Indian_pines_corrected.mat desde la copia pública de Hugging Face](https://huggingface.co/datasets/danaroth/indian_pines/resolve/main/Indian_pines_corrected.mat?download=true) y colócalo en `data/`, o cárgalo cuando Colab lo solicite. Esta copia es mantenida por terceros. Su descarga se verificó y coincide byte por byte con el MAT utilizado para validar este notebook: 5.953.527 bytes, matriz 145×145×200.
+
+SHA-256: `ec2f8808710919d566f70f0d4aa885aae1ddfd42b734aba71c5e12ca65450939`.
+
+La [colección de escenas de EHU](https://www.ehu.eus/ccwintco/index.php/Hyperspectral_Remote_Sensing_Scenes#Indian_Pines) se conserva como referencia de la fuente original, pero devuelve HTTP 403 en las comprobaciones realizadas. El cubo MAT no se redistribuye en este repositorio.
 
 La publicación original de [Baumgardner, Biehl y Landgrebe (2015), Purdue PURR](https://doi.org/10.4231/R7RX991C) incluye la calibración de 220 canales y está marcada CC0. El CSV fue comparado, fila por fila, con el documento de calibración asociado a la copia local. Esto verifica los valores de calibración, pero no demuestra el historial de procesamiento del MAT.
 
@@ -89,5 +93,6 @@ La licencia del código está pendiente de elección por el autor; todavía no s
 ```bash
 python -m unittest discover -s tests -v
 ```
+
 
 
