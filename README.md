@@ -17,6 +17,20 @@ Python tutorial for reducing a hyperspectral image (HSI) cube by averaging chann
 
 The 200-channel mapping is an **assumption that must be checked against the file's provenance**: original channels 104–108, 150–163, and 220 are excluded, using 1-based numbering. If your copy was modified, provide its original channel identifiers. The cube dimensions alone do not verify the mapping.
 
+## Visual results: entropy and morphology
+
+The figure below, provided by Camilo Acevedo-Correa, shows the original workflow's 27-channel output.
+
+![Indian Pines results in three rows: nine MSI bands, nine local entropy maps, and nine morphology maps](assets/entropy_morph.png)
+
+- **Top row — Band [0] to Band [8]:** the nine aggregated MSI bands show intensity patterns across the scene.
+- **Middle row — Band [9] to Band [17]:** local entropy maps highlight texture variation, including transitions between more uniform regions and areas with greater local variability.
+- **Bottom row — Band [18] to Band [26]:** morphology maps simplify fine detail and emphasize the spatial structure of larger regions.
+
+The colors visualize values within each image; they are not land-cover class labels. The labels “Band [0]” through “Band [26]” index the combined feature cube, including the derived entropy and morphology channels.
+
+**About this example:** this is a result from the original nine-band workflow. With corrected Indian Pines and the standard 200-channel mapping, the revised notebook produces 8 MSI bands, 8 entropy maps, and 8 morphology maps (24 channels total), because B9 has no samples.
+
 ## Run in Google Colab
 
 1. Open the Colab link above.
@@ -93,4 +107,5 @@ The author has not yet selected a code license; an MIT license has not been adde
 ```bash
 python -m unittest discover -s tests -v
 ```
+
 
