@@ -97,10 +97,9 @@ The author has not yet selected a code license; an MIT license has not been adde
 ## References
 
 1. [Landsat 8 — NASA](https://science.nasa.gov/mission/landsat-8/).
-2. [Hyperspectral Remote Sensing Scenes — EHU](https://www.ehu.eus/ccwintco/index.php/Hyperspectral_Remote_Sensing_Scenes#Indian_Pines).
-3. [Image Processing with Python: Working with Entropy](https://towardsdatascience.com/image-processing-with-python-working-with-entropy-b05e9c84fc36).
-4. [Morphological Operations — j-manansala](https://github.com/j-manansala/morphological/blob/main/Morphological%20Operations.ipynb).
-5. [Original dataset and calibration — Purdue PURR](https://doi.org/10.4231/R7RX991C).
+2. [Image Processing with Python: Working with Entropy](https://towardsdatascience.com/image-processing-with-python-working-with-entropy-b05e9c84fc36).
+3. [Morphological Operations — j-manansala](https://github.com/j-manansala/morphological/blob/main/Morphological%20Operations.ipynb).
+4. [Original dataset and calibration — Purdue PURR](https://doi.org/10.4231/R7RX991C).
 
 ## Tests
 
